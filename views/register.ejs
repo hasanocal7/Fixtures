@@ -1,3 +1,20 @@
 <%- include('partials/_header') %>
 <%- include('partials/_navigation') %>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <form action="">
+                <input type="text" class="mail_text" placeholder="Full Name" name="name">
+                <select name="role">
+                    <option value="customer">Customer</option>
+                    <option value="member">Member</option>
+                </select>
+                <input type="email" class="mail_text" placeholder="Email" name="email">
+                <input type="password" class="mail_text" placeholder="Password" name="password">
+                <input type="password" class="mail_text" placeholder="Confirm Password" name="c_password">
+                <div class="send_bt mb-5"><a type="submit">Login</a></div>
+             </form>
+        </div>
+    </div>
+</div>
 <%- include('partials/_footer') %>

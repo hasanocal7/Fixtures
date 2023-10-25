@@ -7,6 +7,9 @@ require('dotenv').config(); // .env dosyasını yapılandırmak için 'dotenv' m
 // Express Applicaton
 const app = express();
 
+// DB Connection
+const db = require('./models');
+
 // TEMPLATE ENGINE
 app.set('view engine', 'ejs'); // app.set ile görünüm motorunu ayarlıyoruz. Bu kod, EJS (Embedded JavaScript) görünüm motorunu kullanmayı ayarlar.
 
@@ -22,6 +25,8 @@ app.use('/', require('./routes/pageRoute'));
 
 // SERVER CONNECTION
 const port = process.env.PORT || 5000;
-app.listen(port, () => {
-  console.log(`Server is connected Port: ${port}`);
-});
+db.sequelize.sync().then(()=>{
+  app.listen(port, () => {
+    console.log(`Server is connected Port: ${port}`);
+  });
+})
