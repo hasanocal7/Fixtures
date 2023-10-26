@@ -102,7 +102,7 @@ h4 a,
 h5 a,
 h6 a {
     color: #212121;
-    text-decoration: none!important;
+    text-decoration: none !important;
     opacity: 1
 }
 
@@ -147,7 +147,7 @@ img {
     height: auto;
 }
 
- :focus {
+:focus {
     outline: 0;
 }
 
@@ -309,8 +309,6 @@ input.form-control::placeholder {
     margin-left: -30px;
 }
 
-.call_text {}
-
 .call_text ul {
     margin: 0px;
     padding: 0px;
@@ -456,8 +454,6 @@ input.form-control::placeholder {
 .owl-dots {
     display: none;
 }
-
-.item {}
 
 .owl-carousel .owl-item {
     padding: 15px 0;
