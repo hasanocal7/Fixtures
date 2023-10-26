@@ -47,17 +47,4 @@ Object.keys(db).forEach((modelName) => {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-db.users = require('./User')(sequelize, Sequelize.DataTypes);
-db.tokens = require('./Token')(sequelize, Sequelize.DataTypes);
-
-db.users.hasOne(db.tokens, {
-  as: 'token',
-  foreignKey: 'userId',
-});
-
-db.tokens.belongsTo(db.users, {
-  as: 'user',
-  foreignKey: 'userId',
-});
-
 module.exports = db;

@@ -30,7 +30,7 @@ app.use(errorHandler);
 
 // SERVER CONNECTION
 const port = process.env.PORT || 5000;
-db.sequelize.sync().then(() => {
+db.sequelize.sync({ alter: true }).then(() => {
   app.listen(port, () => {
     console.log(`Server is connected Port: ${port}`);
   });
