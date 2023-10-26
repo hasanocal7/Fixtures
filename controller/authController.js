@@ -76,9 +76,9 @@ exports.verifyEmail = async (req, res) => {
 
         //if user is already verified, tell the user to login
       } else if (user.isVerified) {
-        return res
-          .status(200)
-          .send('User has been already verified. Please Login');
+        return res.status(200).render('verifyMessage', {
+          message: 'User has been already verified. Please Login',
+        });
 
         //if user is not verified, change the verified to true by updating the field
       } else {
@@ -97,9 +97,9 @@ exports.verifyEmail = async (req, res) => {
           return res.status(500).send({ msg: err.message });
           //else send status of 200
         } else {
-          return res
-            .status(200)
-            .send('Your account has been successfully verified');
+          return res.status(200).render('verifyMessage', {
+            message: 'Your account has been successfully verified',
+          });
         }
       }
     }
