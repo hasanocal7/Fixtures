@@ -1,14 +1,23 @@
-<%- include('partials/_header') %>
-<%- include('partials/_navigation') %>
+<%- include('partials/_header') %> <%- include('partials/_navigation') %>
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-6">
-            <form action="/users/signin">
-                <input type="email" class="mail_text" placeholder="Email" name="email">
-                <input type="password" class="mail_text" placeholder="Password" name="password">
-                <div class="send_bt mb-5"><button type="submit">Login</button></div>
-             </form>
-        </div>
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      <form action="/users/signin" method="POST">
+        <input
+          type="email"
+          class="mail_text"
+          placeholder="Email"
+          name="email"
+        />
+        <input
+          type="password"
+          class="mail_text"
+          placeholder="Password"
+          name="password"
+        />
+        <div class="send_bt mb-5"><button type="submit">Login</button></div>
+      </form>
     </div>
+  </div>
 </div>
 <%- include('partials/_footer') %>

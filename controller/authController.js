@@ -1,8 +1,8 @@
-const { error } = require('console');
 const { User, Token } = require('../models');
 const { hashPassword } = require('../utils/hashPassword');
 const { sendingMail } = require('../utils/mailings');
 const crypto = require('crypto');
+const jwt = require('jsonwebtoken');
 
 exports.createUser = async (req, res, next) => {
   try {
@@ -38,7 +38,7 @@ exports.createUser = async (req, res, next) => {
       throw new Error('User creation failed');
     }
 
-    res.status(201).send(user);
+    res.status(201).redirect('/login');
   } catch (error) {
     next(error);
   }
@@ -112,7 +112,18 @@ exports.loginUser = async (req, res) => {
   try {
     const { email } = req.body;
     const user = await User.findOne({ where: { email: email } });
-    res.status(200).send(user);
+    const createToken = (UserId) => {
+      return jwt.sign({ UserId }, process.env.JWT_SECRET, {
+        expiresIn: '1d',
+      });
+    };
+    const maxAge = 24 * 60 * 60 * 1000;
+    const token = createToken(user.id);
+    res.cookie('jwt', token, {
+      maxAge: maxAge,
+      httpOnly: true,
+    });
+    res.status(200).json({ user });
   } catch (error) {
     res.status(400).send(error);
   }

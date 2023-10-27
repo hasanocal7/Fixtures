@@ -47,6 +47,13 @@ exports.beforeLogin = async (req, res, next) => {
         if (!isPasswordCorrect) {
           res.status(401);
           throw new Error('Password is not correct');
+        } else {
+          if (!user.isVerified) {
+            return res.status(200).render('verifyMessage', {
+              message:
+                'Please verify your account first via the link in your email.',
+            });
+          }
         }
       }
     }
