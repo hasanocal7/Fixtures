@@ -86,3 +86,30 @@ exports.authenticateToken = (req, res, next) => {
     throw new Error('Token is not authorized');
   }
 };
+
+exports.checkUser = (req, res, next) => {
+  try {
+    const token = req.cookies.jwt;
+    if (token) {
+      jwt.verify(token, process.env.JWT_SECRET, async (err, decodedToken) => {
+        if (err) {
+          console.log(err.message);
+          res.locals.user = null;
+          next();
+        } else {
+          const user = await User.findOne({
+            where: { id: decodedToken.UserId },
+          });
+          res.locals.user = user;
+          console.log(res.locals.user);
+          next();
+        }
+      });
+    } else {
+      res.locals.user = null;
+      next();
+    }
+  } catch (error) {
+    next(error);
+  }
+};

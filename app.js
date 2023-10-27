@@ -26,6 +26,8 @@ app.use(helmet());
 app.use(methodOverride('_method')); // HTTP yöntemlerini (GET, POST, PUT, vb.) belirlemek için methodOverride middleware'ini kullanıyoruz. Bu, özellikle HTML formları ve AJAX istekleriyle çalışırken PUT ve DELETE isteklerini işlemek için kullanışlıdır.
 
 // ROUTES
+const { checkUser } = require('./middleware/userAuth');
+app.use('*', checkUser);
 app.use('/', require('./routes/pageRoute'));
 app.use('/users', require('./routes/userRoute'));
 

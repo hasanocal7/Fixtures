@@ -130,5 +130,8 @@ exports.loginUser = async (req, res) => {
 };
 
 exports.getDashboardPage = async (req, res) => {
-  res.status(200).render('dashboard');
+  const user = await User.findOne({ where: { id: res.locals.user.id } });
+  res.status(200).render('dashboard', {
+    user,
+  });
 };
