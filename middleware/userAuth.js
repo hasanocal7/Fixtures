@@ -1,6 +1,7 @@
 const { User } = require('../models');
 const { isEmail, equals } = require('validator');
 const { comparePassword } = require('../utils/hashPassword');
+const jwt = require('jsonwebtoken');
 
 exports.beforeCreate = async (req, res, next) => {
   try {
@@ -60,5 +61,28 @@ exports.beforeLogin = async (req, res, next) => {
     next();
   } catch (error) {
     next(error);
+  }
+};
+
+exports.authenticateToken = (req, res, next) => {
+  try {
+    const token = req.cookies.jwt;
+    if (token) {
+      console.log(token);
+      jwt.verify(token, process.env.JWT_SECRET, (err) => {
+        if (err) {
+          console.log(err.message);
+          res.redirect('/login');
+        } else {
+          console.log('Token is Verified');
+          next();
+        }
+      });
+    } else {
+      res.redirect('/login');
+    }
+  } catch (error) {
+    res.status(401);
+    throw new Error('Token is not authorized');
   }
 };

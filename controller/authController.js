@@ -123,8 +123,12 @@ exports.loginUser = async (req, res) => {
       maxAge: maxAge,
       httpOnly: true,
     });
-    res.status(200).json({ user });
+    res.status(200).redirect('/users/dashboard');
   } catch (error) {
     res.status(400).send(error);
   }
+};
+
+exports.getDashboardPage = async (req, res) => {
+  res.status(200).render('dashboard');
 };
