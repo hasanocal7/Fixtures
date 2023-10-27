@@ -34,3 +34,8 @@ exports.getRegisterPage = (req, res) => {
     page_name: 'register',
   });
 };
+
+exports.logoutUser = (req, res) => {
+  res.clearCookie('jwt');
+  res.redirect('/');
+};
