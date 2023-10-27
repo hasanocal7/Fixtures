@@ -7,5 +7,6 @@ router.route('/furnitures').get(pageController.getFurnituresPage);
 router.route('/contact').get(pageController.getContactPage);
 router.route('/login').get(pageController.getLoginPage);
 router.route('/register').get(pageController.getRegisterPage);
+router.route('/logout').get(pageController.logoutUser);
 
 module.exports = router;
