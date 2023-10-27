@@ -3,7 +3,7 @@ const userAuth = require('../middleware/userAuth');
 const authController = require('../controller/authController');
 
 router.route('/signup').post(userAuth.beforeCreate, authController.createUser);
-router.route('/signin').post(authController.loginUser);
+router.route('/signin').post(userAuth.beforeLogin, authController.loginUser);
 router.route('/verify-email/:id/:token').get(authController.verifyEmail);
 
 module.exports = router;

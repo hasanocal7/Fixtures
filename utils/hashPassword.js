@@ -12,3 +12,15 @@ exports.hashPassword = async (password) => {
     console.log('Password is hashed!');
   }
 };
+
+exports.comparePassword = async (bodyPassword, password) => {
+  try {
+    const comparedPassword = await bcrypt.compare(bodyPassword, password);
+    return comparedPassword;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  } finally {
+    console.log('Password is compared');
+  }
+};

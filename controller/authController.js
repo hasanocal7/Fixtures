@@ -110,7 +110,8 @@ exports.verifyEmail = async (req, res) => {
 
 exports.loginUser = async (req, res) => {
   try {
-    const user = req.body;
+    const { email } = req.body;
+    const user = await User.findOne({ where: { email: email } });
     res.status(200).send(user);
   } catch (error) {
     res.status(400).send(error);
