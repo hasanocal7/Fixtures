@@ -22,7 +22,6 @@ app.use(cors()); //CORS (Cross-Origin Resource Sharing) için middleware'i etkin
 app.use(bodyParser.json()); // İstek gövdelerini işlemek için bodyParser middleware'ini kullanıyoruz. Bu, gelen verileri ayrıştırabilir ve uygulamada kullanılabilir hale getirebilir.
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(helmet());
 app.use(methodOverride('_method')); // HTTP yöntemlerini (GET, POST, PUT, vb.) belirlemek için methodOverride middleware'ini kullanıyoruz. Bu, özellikle HTML formları ve AJAX istekleriyle çalışırken PUT ve DELETE isteklerini işlemek için kullanışlıdır.
 
 // ROUTES
