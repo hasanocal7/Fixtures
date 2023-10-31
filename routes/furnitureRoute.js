@@ -11,6 +11,8 @@ router
   .route('/:id')
   .put(upload.single('image'), furnitureController.updateFurniture);
 
+router.route('/:id').delete(furnitureController.deleteFurniture);
+
 router.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500);

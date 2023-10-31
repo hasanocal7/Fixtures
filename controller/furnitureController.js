@@ -10,7 +10,7 @@ exports.createFurniture = async (req, res) => {
       res.status(400);
       throw new Error('Please upload a picture');
     } else {
-      const imageFileName = '/uploads/' + req.file.filename;
+      const imageFileName = '/data/uploads/' + req.file.filename;
       const furniture = await Furniture.create({
         ...req.body,
         image: imageFileName,
@@ -53,6 +53,15 @@ exports.updateFurniture = async (req, res, next) => {
       );
       res.status(200).redirect('/users/dashboard');
     }
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.deleteFurniture = (req, res, next) => {
+  try {
+    Furniture.destroy({ where: { id: req.params.id } });
+    res.status(200).redirect('/users/dashboard');
   } catch (error) {
     next(error);
   }

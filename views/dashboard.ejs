@@ -62,15 +62,32 @@ page_name: 'dashboard' }) %>
               </div>
               <p class="chair_text"><%= furnitures[i].name %></p>
               <p class="chair_text"><%= furnitures[i].category %></p>
-              <button
-                class="btn btn-success"
-                type="button"
-                data-toggle="modal"
-                data-target="#updateModal<%= furnitures[i].id %>"
-                data-whatever="@getbootstrap"
+              <div
+                class="item_btns"
+                style="display: flex; justify-content: space-between"
               >
-                Update
-              </button>
+                <button
+                  class="btn btn-success"
+                  type="button"
+                  data-toggle="modal"
+                  data-target="#updateModal<%= furnitures[i].id %>"
+                  data-whatever="@getbootstrap"
+                >
+                  Update
+                </button>
+                <form
+                  action="/furnitures/<%= furnitures[i].id %>?_method=DELETE"
+                  method="POST"
+                >
+                  <button
+                    type="submit"
+                    onclick="return confirm('Are you sure?')"
+                    class="btn btn-danger"
+                  >
+                    Delete
+                  </button>
+                </form>
+              </div>
             </div>
           </div>
           <div
