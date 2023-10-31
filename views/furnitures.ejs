@@ -53,6 +53,7 @@
           </div>
         </div>
       </div>
+      <!-- Bedroom Section -->
       <div id="bedroomFurnitures" style="display: none">
         <div class="blog_section layout_padding">
           <div class="container">
@@ -76,6 +77,7 @@
           </div>
         </div>
       </div>
+      <!-- Office Section -->
       <div id="officeFurnitures" style="display: none">
         <div class="blog_section layout_padding">
           <div class="container">
@@ -90,6 +92,30 @@
                     <p class="chair_text"><%= officeFurnitures[i].name %></p>
                     <p class="chair_text">
                       <%= officeFurnitures[i].category %>
+                    </p>
+                  </div>
+                </div>
+                <% } %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Bathroom Section -->
+      <div id="bathroomFurnitures" style="display: none">
+        <div class="blog_section layout_padding">
+          <div class="container">
+            <div class="blog_section_2 layout_padding">
+              <div class="row">
+                <% for(let i=0; i< bathroomFurnitures.length; i++) { %>
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                  <div class="blog_box">
+                    <div class="blog_img">
+                      <img src="<%= bathroomFurnitures[i].image %>" />
+                    </div>
+                    <p class="chair_text"><%= bathroomFurnitures[i].name %></p>
+                    <p class="chair_text">
+                      <%= bathroomFurnitures[i].category %>
                     </p>
                   </div>
                 </div>

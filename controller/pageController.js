@@ -21,14 +21,14 @@ exports.getFurnituresPage = async (req, res) => {
   const officeFurnitures = await Furniture.findAll({
     where: { category: 'office' },
   });
-  const bathFurnitures = await Furniture.findAll({
+  const bathroomFurnitures = await Furniture.findAll({
     where: { category: 'bathroom' },
   });
   res.render('furnitures', {
     page_name: 'furnitures',
     bedroomFurnitures,
     officeFurnitures,
-    bathFurnitures,
+    bathroomFurnitures,
   });
 };
 
