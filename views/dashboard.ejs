@@ -13,7 +13,6 @@ page_name: 'dashboard' }) %>
     <% if(user.role === 'admin') { %>
     <div class="col-md-12">
       <div class="info btns">
-        <button class="btn btn-success">Update Furniture</button>
         <button class="btn btn-danger">Delete Furniture</button>
       </div>
     </div>
@@ -21,6 +20,8 @@ page_name: 'dashboard' }) %>
       <div class="form_title">
         <h1>Add Furniture</h1>
       </div>
+    </div>
+    <div class="col-md-12">
       <form
         action="/furnitures/addFurniture"
         method="POST"
@@ -41,34 +42,100 @@ page_name: 'dashboard' }) %>
         <div class="send_bt"><button type="submit">Add Furniture</button></div>
       </form>
     </div>
-    <div class="blog_section layout_padding">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12">
-            <h1 class="blog_taital">Trending Products</h1>
-          </div>
-        </div>
-      </div>
-      <div class="container">
-        <div class="blog_section_2 layout_padding">
-          <div class="row">
-            <% for(let i=0; i< furnitures.length; i++) { %>
-            <div class="col-lg-4 col-md-4 col-sm-12">
-              <div class="blog_box">
-                <div class="blog_img">
-                  <img src="/data/<%= furnitures[i].image %>" />
-                </div>
-                <p class="chair_text"><%= furnitures[i].name %></p>
-                <p class="chair_text"><%= furnitures[i].category %></p>
-              </div>
-            </div>
-            <% } %>
-          </div>
+  </div>
+  <div class="blog_section layout_padding">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="blog_taital">Trending Products</h1>
         </div>
       </div>
     </div>
-    <% } %>
+    <div class="container">
+      <div class="blog_section_2 layout_padding">
+        <div class="row">
+          <% for(let i=0; i< furnitures.length; i++) { %>
+          <div class="col-lg-4 col-md-4 col-sm-12">
+            <div class="blog_box">
+              <div class="blog_img">
+                <img src="<%= furnitures[i].image %>" />
+              </div>
+              <p class="chair_text"><%= furnitures[i].name %></p>
+              <p class="chair_text"><%= furnitures[i].category %></p>
+              <button
+                class="btn btn-success"
+                type="button"
+                data-toggle="modal"
+                data-target="#updateModal<%= furnitures[i].id %>"
+                data-whatever="@getbootstrap"
+              >
+                Update
+              </button>
+            </div>
+          </div>
+          <div
+            class="modal fade"
+            id="updateModal<%= furnitures[i].id %>"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div
+              class="modal-dialog modal-dialog-centered modal-xl"
+              role="document"
+            >
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">
+                    New message
+                  </h5>
+                  <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <form
+                    action="/furnitures/<%= furnitures[i].id %>?_method=PUT"
+                    method="POST"
+                    enctype="multipart/form-data"
+                  >
+                    <input
+                      class="mail_text"
+                      type="text"
+                      name="name"
+                      value="<%= furnitures[i].name %>"
+                      placeholder="Furniture Name"
+                    />
+                    <select name="category" class="mail_text">
+                      <option class="mail_text" value="bedroom">Bedroom</option>
+                      <option class="mail_text" value="office">Office</option>
+                      <option class="mail_text" value="bathroom">
+                        Bathroom
+                      </option>
+                    </select>
+                    <input class="mail_text" type="file" name="image" />
+                    <div class="send_bt">
+                      <button class="btn btn-success" type="submit">
+                        Update Furniture
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          <% } %>
+        </div>
+      </div>
+    </div>
   </div>
+  <% } %>
 </div>
 <style>
   .info {

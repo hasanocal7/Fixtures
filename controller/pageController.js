@@ -1,8 +1,10 @@
-const { User } = require('../models');
+const { Furniture } = require('../models');
 
 exports.getHomePage = async (req, res) => {
+  const furnitures = await Furniture.findAll();
   res.render('index', {
     page_name: 'home',
+    furnitures,
   });
 };
 

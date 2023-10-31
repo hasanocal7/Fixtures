@@ -31,3 +31,29 @@ exports.getAllFurnitures = async (req, res, next) => {
     next(error);
   }
 };
+
+exports.updateFurniture = async (req, res, next) => {
+  try {
+    if (req.file instanceof multer.MulterError) {
+      res.status(400);
+      throw new Error('Multer error loading image');
+    } else if (!req.file) {
+      res.status(400);
+      throw new Error('Please upload a picture');
+    } else {
+      const imageFileName = '/data/uploads/' + req.file.filename;
+      const furniture = await Furniture.update(
+        {
+          ...req.body,
+          image: imageFileName,
+        },
+        {
+          where: { id: req.params.id },
+        }
+      );
+      res.status(200).redirect('/users/dashboard');
+    }
+  } catch (error) {
+    next(error);
+  }
+};
