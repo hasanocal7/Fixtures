@@ -29,6 +29,7 @@ const { checkUser } = require('./middleware/userAuth');
 app.use('*', checkUser);
 app.use('/', require('./routes/pageRoute'));
 app.use('/users', require('./routes/userRoute'));
+app.use('/furnitures', require('./routes/furnitureRoute'));
 
 // ERROR HANDLER
 app.use(errorHandler);

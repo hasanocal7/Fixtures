@@ -1,19 +1,69 @@
 <%- include('partials/_header') %> <%- include('partials/_navigation', {
 page_name: 'dashboard' }) %>
 <div class="container">
-  <div class="row justify-content-center">
-    <div class="col-md-6">
+  <div class="row">
+    <div class="col-md-12">
       <div class="info">
         <h1><%= user.name %></h1>
         <h2><%= user.role %></h2>
         <p><%= user.email %></p>
       </div>
+      <hr />
     </div>
+    <% if(user.role === 'admin') { %>
+    <div class="col-md-12">
+      <div class="info btns">
+        <button class="btn btn-success">Update Furniture</button>
+        <button class="btn btn-danger">Delete Furniture</button>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="form_title">
+        <h1>Add Furniture</h1>
+      </div>
+      <form action="/furnitures/addFurniture" method="POST">
+        <input
+          class="mail_text"
+          type="text"
+          name="name"
+          placeholder="Furniture Name"
+        />
+        <select name="category" class="mail_text">
+          <option class="mail_text" value="bedroom">Bedroom</option>
+          <option class="mail_text" value="office">Office</option>
+          <option class="mail_text" value="bathroom">Bathroom</option>
+        </select>
+        <input class="mail_text" type="file" name="image" />
+        <div class="send_bt"><button type="submit">Add Furniture</button></div>
+      </form>
+    </div>
+    <div class="blog_section layout_padding">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <h1 class="blog_taital">Trending Products</h1>
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="blog_section_2 layout_padding">
+          <div class="row">
+            <div class="col-lg-4 col-md-4 col-sm-12">
+              <div class="blog_box">
+                <div class="blog_img"><img src="images/blog-img1.png" /></div>
+                <p class="chair_text">Chairs</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <% } %>
   </div>
 </div>
 <style>
   .info {
-    padding: 100px;
+    margin-top: 1rem;
     font-size: 24px;
     color: #212121;
     display: flex;
