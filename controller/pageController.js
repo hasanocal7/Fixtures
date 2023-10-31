@@ -14,9 +14,21 @@ exports.getAboutPage = (req, res) => {
   });
 };
 
-exports.getFurnituresPage = (req, res) => {
+exports.getFurnituresPage = async (req, res) => {
+  const bedroomFurnitures = await Furniture.findAll({
+    where: { category: 'bedroom' },
+  });
+  const officeFurnitures = await Furniture.findAll({
+    where: { category: 'office' },
+  });
+  const bathFurnitures = await Furniture.findAll({
+    where: { category: 'bathroom' },
+  });
   res.render('furnitures', {
     page_name: 'furnitures',
+    bedroomFurnitures,
+    officeFurnitures,
+    bathFurnitures,
   });
 };
 

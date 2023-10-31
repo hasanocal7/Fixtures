@@ -18,25 +18,90 @@
             <figure><img src="images/img-1.png" /></figure>
           </div>
           <h3 class="introduction_text">Bedroom</h3>
-          <div class="seemore_bt"><a href="#">See More</a></div>
+          <div class="seemore_bt">
+            <a
+              href="javascript:void(0);"
+              onclick="gizleGoster('bedroomFurnitures')"
+              >See More</a
+            >
+          </div>
         </div>
         <div class="col-md-4">
           <div class="hover01 column">
             <figure><img src="images/img-2.png" /></figure>
           </div>
           <h3 class="introduction_text">Office</h3>
-          <div class="seemore_bt active"><a href="#">See More</a></div>
+          <div class="seemore_bt">
+            <a
+              href="javascript:void(0);"
+              onclick="gizleGoster('officeFurnitures')"
+              >See More</a
+            >
+          </div>
         </div>
         <div class="col-md-4">
           <div class="hover01 column">
             <figure><img src="images/img-3.png" /></figure>
           </div>
           <h3 class="introduction_text">Bathroom</h3>
-          <div class="seemore_bt"><a href="#">See More</a></div>
+          <div class="seemore_bt">
+            <a
+              href="javascript:void(0);"
+              onclick="gizleGoster('bathroomFurnitures')"
+              >See More</a
+            >
+          </div>
+        </div>
+      </div>
+      <div id="bedroomFurnitures" style="display: none">
+        <div class="blog_section layout_padding">
+          <div class="container">
+            <div class="blog_section_2 layout_padding">
+              <div class="row">
+                <% for(let i=0; i< bedroomFurnitures.length; i++) { %>
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                  <div class="blog_box">
+                    <div class="blog_img">
+                      <img src="<%= bedroomFurnitures[i].image %>" />
+                    </div>
+                    <p class="chair_text"><%= bedroomFurnitures[i].name %></p>
+                    <p class="chair_text">
+                      <%= bedroomFurnitures[i].category %>
+                    </p>
+                  </div>
+                </div>
+                <% } %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="officeFurnitures" style="display: none">
+        <div class="blog_section layout_padding">
+          <div class="container">
+            <div class="blog_section_2 layout_padding">
+              <div class="row">
+                <% for(let i=0; i< officeFurnitures.length; i++) { %>
+                <div class="col-lg-4 col-md-4 col-sm-12">
+                  <div class="blog_box">
+                    <div class="blog_img">
+                      <img src="<%= officeFurnitures[i].image %>" />
+                    </div>
+                    <p class="chair_text"><%= officeFurnitures[i].name %></p>
+                    <p class="chair_text">
+                      <%= officeFurnitures[i].category %>
+                    </p>
+                  </div>
+                </div>
+                <% } %>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- Furnitures section end -->
+  <%- include('partials/_footer') %>
 </div>
-<!-- furnitures section end -->
-<%- include('partials/_footer') %>
