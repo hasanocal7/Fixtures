@@ -2,7 +2,6 @@ const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const helmet = require('helmet');
 const methodOverride = require('method-override');
 require('dotenv').config(); // .env dosyasını yapılandırmak için 'dotenv' modülünü kullanıyoruz.
 const errorHandler = require('./middleware/errorHandler');
@@ -36,7 +35,7 @@ app.use(errorHandler);
 
 // SERVER CONNECTION
 const port = process.env.PORT || 5000;
-db.sequelize.sync({ alter: true }).then(() => {
+db.sequelize.sync().then(() => {
   app.listen(port, () => {
     console.log(`Server is connected Port: ${port}`);
   });

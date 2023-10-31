@@ -116,60 +116,17 @@
   <div class="container">
     <div class="blog_section_2 layout_padding">
       <div class="row">
+        <% for(let i=0; i< furnitures.length; i++) { %>
         <div class="col-lg-4 col-md-4 col-sm-12">
           <div class="blog_box">
-            <div class="blog_img"><img src="images/blog-img1.png" /></div>
-            <p class="chair_text">Chairs</p>
+            <div class="blog_img">
+              <img src="<%= furnitures[i].image %>" />
+            </div>
+            <p class="chair_text"><%= furnitures[i].name %></p>
+            <p class="chair_text"><%= furnitures[i].category %></p>
           </div>
         </div>
-        <div class="col-lg-4 col-md-4 col-sm-12">
-          <div class="blog_box">
-            <div class="blog_img"><img src="images/blog-img2.png" /></div>
-            <p class="chair_text">Chair</p>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-12">
-          <div class="blog_box">
-            <div class="blog_img"><img src="images/blog-img3.png" /></div>
-            <p class="chair_text">Sideboard</p>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-12">
-          <div class="blog_box">
-            <div class="blog_img"><img src="images/blog-img4.png" /></div>
-            <p class="chair_text">Chairs</p>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-12">
-          <div class="blog_box">
-            <div class="blog_img"><img src="images/blog-img5.png" /></div>
-            <p class="chair_text">Chair</p>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-12">
-          <div class="blog_box">
-            <div class="blog_img"><img src="images/blog-img6.png" /></div>
-            <p class="chair_text">Sideboard</p>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-12">
-          <div class="blog_box">
-            <div class="blog_img"><img src="images/blog-img7.png" /></div>
-            <p class="chair_text">Chairs</p>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-12">
-          <div class="blog_box">
-            <div class="blog_img"><img src="images/blog-img8.png" /></div>
-            <p class="chair_text">Chair</p>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-12">
-          <div class="blog_box">
-            <div class="blog_img"><img src="images/blog-img9.png" /></div>
-            <p class="chair_text">Sideboard</p>
-          </div>
-        </div>
+        <% } %>
       </div>
     </div>
     <div class="readmore_bt"><a href="#">See More</a></div>
