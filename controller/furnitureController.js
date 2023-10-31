@@ -5,10 +5,10 @@ exports.createFurniture = async (req, res) => {
   try {
     if (req.file instanceof multer.MulterError) {
       res.status(400);
-      throw new Error('Resim yüklenirken Multer kaynaklı hata oluştu');
+      throw new Error('Multer error loading image');
     } else if (!req.file) {
       res.status(400);
-      throw new Error({ error: 'Lütfen bir resim yükleyin' });
+      throw new Error('Please upload a picture');
     } else {
       const imageFileName = '/uploads/' + req.file.filename;
       const furniture = await Furniture.create({
@@ -18,7 +18,16 @@ exports.createFurniture = async (req, res) => {
       res.status(201).redirect('/users/dashboard');
     }
   } catch (error) {
-    console.error('Beklenmeyen bir hata oluştu:', error);
-    res.status(500).json({ error: 'Beklenmeyen bir hata oluştu' });
+    res.status(500);
+    throw new Error('An unexpected error occurred');
+  }
+};
+
+exports.getAllFurnitures = async (req, res, next) => {
+  try {
+    const furnitures = await Furniture.findAll();
+    res.status(200).json(furnitures);
+  } catch (error) {
+    next(error);
   }
 };

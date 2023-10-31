@@ -1,4 +1,4 @@
-const { User, Token } = require('../models');
+const { User, Token, Furniture } = require('../models');
 const { hashPassword } = require('../utils/hashPassword');
 const { sendingMail } = require('../utils/mailings');
 const crypto = require('crypto');
@@ -131,7 +131,9 @@ exports.loginUser = async (req, res) => {
 
 exports.getDashboardPage = async (req, res) => {
   const user = await User.findOne({ where: { id: res.locals.user.id } });
+  const furnitures = await Furniture.findAll();
   res.status(200).render('dashboard', {
     user,
+    furnitures,
   });
 };
