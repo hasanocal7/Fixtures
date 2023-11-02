@@ -69,9 +69,9 @@
   function gizleGoster(ID) {
     var secilenID = $('#' + ID);
     if (secilenID.is(':hidden')) {
+      $('.furniture-content').slideUp('medium'); // Tüm açık olanları kapat
       secilenID.slideDown('medium', function () {
-        // Animasyon tamamlandığında sayfayı hedefe kaydır
-        var targetOffset = secilenID.offset().top - 100; // Hedefin başlangıç noktasını daha düşük bir değere ayarlayın
+        var targetOffset = secilenID.offset().top - 100;
         $('html, body').animate({ scrollTop: targetOffset }, 'medium');
       });
     } else {

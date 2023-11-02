@@ -49,16 +49,16 @@ exports.verifyEmail = async (req, res) => {
     const token = req.params.token;
 
     //find user by token using the where clause
-    const usertoken = await Token.findOne({
+    const userToken = await Token.findOne({
       token,
       where: {
         userId: req.params.id,
       },
     });
-    console.log(usertoken);
+    console.log(userToken);
 
-    //if token doesnt exist, send status of 400
-    if (!usertoken) {
+    //if token doesn't exist, send status of 400
+    if (!userToken) {
       return res.status(400).send({
         msg: 'Your verification link may have expired. Please click on resend for verify your Email.',
       });
@@ -86,7 +86,7 @@ exports.verifyEmail = async (req, res) => {
           { isVerified: true },
           {
             where: {
-              id: usertoken.UserId,
+              id: userToken.UserId,
             },
           }
         );
