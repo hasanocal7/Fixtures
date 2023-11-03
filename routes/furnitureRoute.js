@@ -1,9 +1,10 @@
 const router = require('express').Router();
 const furnitureController = require('../controller/furnitureController');
+const { checkReserv } = require('../middleware/reserveMiddleware');
 const multer = require('multer');
 const upload = multer({ dest: './public/data/uploads/' });
 
-router.route('/').get(furnitureController.getAllFurnitures);
+router.route('/').get(checkReserv, furnitureController.getAllFurnitures);
 
 router
   .route('/addFurniture')

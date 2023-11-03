@@ -44,7 +44,6 @@ exports.beforeLogin = async (req, res, next) => {
           password,
           user.password
         );
-        console.log(isPasswordCorrect);
         if (!isPasswordCorrect) {
           res.status(401);
           throw new Error('Password is not correct');
@@ -68,11 +67,10 @@ exports.authenticateToken = (req, res, next) => {
   try {
     const token = req.cookies.jwt;
     if (token) {
-      console.log(token);
       jwt.verify(token, process.env.JWT_SECRET, (err) => {
         if (err) {
-          console.log(err.message);
           res.redirect('/login');
+          throw new Error(err.message);
         } else {
           console.log('Token is Verified');
           next();
@@ -93,15 +91,14 @@ exports.checkUser = (req, res, next) => {
     if (token) {
       jwt.verify(token, process.env.JWT_SECRET, async (err, decodedToken) => {
         if (err) {
-          console.log(err.message);
           res.locals.user = null;
           next();
+          throw new Error(err.message);
         } else {
           const user = await User.findOne({
             where: { id: decodedToken.UserId },
           });
           res.locals.user = user;
-          console.log(res.locals.user);
           next();
         }
       });
