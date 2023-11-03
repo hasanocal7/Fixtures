@@ -47,11 +47,29 @@
         </div>
         <div class="widget-categories">
           <h3 class="widget-title">Categories</h3>
-          <ul>
-            <li><a href="/furnitures?category=bedroom">Bedroom</a></li>
-            <li><a href="/furnitures?category=office">Office</a></li>
-            <li><a href="/furnitures?category=bathroom">Bathroom</a></li>
-          </ul>
+          <form action="/furnitures" method="get">
+            <ul>
+              <li>
+                <label>
+                  <input type="checkbox" name="category" value="bedroom" />
+                  Bedroom
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" name="category" value="office" />
+                  Office
+                </label>
+              </li>
+              <li>
+                <label>
+                  <input type="checkbox" name="category" value="bathroom" />
+                  Bathroom
+                </label>
+              </li>
+            </ul>
+            <input type="submit" value="Filter" />
+          </form>
         </div>
       </div>
     </div>
