@@ -52,25 +52,15 @@
       </div>
       <!-- end col -->
       <div class="col-lg-3 col-12 right-single">
-        <div class="widget-search">
-          <div class="site-search-area">
-            <form method="GET" id="site-searchform" action="/furnitures">
-              <div>
-                <input
-                  class="input-text form-control"
-                  name="search"
-                  id="search-k"
-                  placeholder="Search..."
-                  type="text"
-                />
-                <button id="searchsubmit" value="Search" type="submit"></button>
-              </div>
-            </form>
-          </div>
-        </div>
         <div class="widget-categories">
-          <h3 class="widget-title">Categories</h3>
           <form action="/furnitures" method="get">
+            <input
+              name="search"
+              id="search-k"
+              placeholder="Search..."
+              type="search"
+            />
+            <h3 class="widget-title">Categories</h3>
             <ul>
               <li>
                 <label>
@@ -91,7 +81,9 @@
                 </label>
               </li>
             </ul>
-            <input type="submit" value="Filter" />
+            <div class="send_bt">
+              <button type="submit">Search</button>
+            </div>
           </form>
         </div>
       </div>

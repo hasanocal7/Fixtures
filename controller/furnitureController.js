@@ -1,4 +1,4 @@
-const { fileLoader } = require('ejs');
+const { Op } = require('sequelize');
 const { Furniture, User, Reserve } = require('../models');
 const multer = require('multer');
 
@@ -30,11 +30,18 @@ exports.getAllFurnitures = async (req, res, next) => {
     const reserve = await Reserve.findAll({
       where: { UserId: res.locals.user.id },
     });
+    const query = req.query.search;
     const category = req.query.category;
     let filter = {};
-    if (category) {
-      filter = { category: category };
+
+    if (query) {
+      filter.name = { [Op.like]: `%${query}%` };
     }
+
+    if (category) {
+      filter.category = category;
+    }
+
     const furnitures = await Furniture.findAll({ where: filter });
     res.status(200).render('furnitures', {
       page_name: 'furnitures',
