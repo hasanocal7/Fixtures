@@ -1,3 +1,4 @@
+const { fileLoader } = require('ejs');
 const { Furniture } = require('../models');
 const multer = require('multer');
 
@@ -25,8 +26,16 @@ exports.createFurniture = async (req, res) => {
 
 exports.getAllFurnitures = async (req, res, next) => {
   try {
-    const furnitures = await Furniture.findAll();
-    res.status(200).json(furnitures);
+    const category = req.query.category;
+    let filter = {};
+    if (category) {
+      filter = { category: category };
+    }
+    const furnitures = await Furniture.findAll({ where: filter });
+    res.status(200).render('furnitures', {
+      page_name: 'furnitures',
+      furnitures,
+    });
   } catch (error) {
     next(error);
   }

@@ -3,6 +3,8 @@ const furnitureController = require('../controller/furnitureController');
 const multer = require('multer');
 const upload = multer({ dest: './public/data/uploads/' });
 
+router.route('/').get(furnitureController.getAllFurnitures);
+
 router
   .route('/addFurniture')
   .post(upload.single('image'), furnitureController.createFurniture);

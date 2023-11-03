@@ -1,133 +1,65 @@
 <%- include('partials/_header') %> <%- include('partials/_navigation') %>
 <!-- furnitures section start -->
-<div class="furnitures_section layout_padding">
+<div id="overviews" class="section wb">
   <div class="container">
     <div class="row">
-      <div class="col-sm-12">
-        <h1 class="furnitures_taital">Our Furnitures Work</h1>
-        <p class="furnitures_text">
-          reader will be distracted by the readable content of a page when
-          looking at its layout.
-        </p>
+      <div class="col-md-12">
+        <h1 style="text-align: center; margin-top: 2rem">Furnitures</h1>
       </div>
-    </div>
-    <div class="furnitures_section_2">
-      <div class="row">
-        <div class="col-md-4">
-          <div class="hover01 column">
-            <figure><img src="images/img-1.png" /></figure>
-          </div>
-          <h3 class="introduction_text">Bedroom</h3>
-          <div class="seemore_bt">
-            <a
-              href="javascript:void(0);"
-              onclick="gizleGoster('bedroomFurnitures')"
-              >See More</a
-            >
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="hover01 column">
-            <figure><img src="images/img-2.png" /></figure>
-          </div>
-          <h3 class="introduction_text">Office</h3>
-          <div class="seemore_bt">
-            <a
-              href="javascript:void(0);"
-              onclick="gizleGoster('officeFurnitures')"
-              >See More</a
-            >
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="hover01 column">
-            <figure><img src="images/img-3.png" /></figure>
-          </div>
-          <h3 class="introduction_text">Bathroom</h3>
-          <div class="seemore_bt">
-            <a
-              href="javascript:void(0);"
-              onclick="gizleGoster('bathroomFurnitures')"
-              >See More</a
-            >
-          </div>
-        </div>
-      </div>
-      <!-- Bedroom Section -->
-      <div id="bedroomFurnitures" style="display: none">
-        <div class="blog_section layout_padding">
-          <div class="container">
-            <div class="blog_section_2 layout_padding">
-              <div class="row">
-                <% for(let i=0; i< bedroomFurnitures.length; i++) { %>
-                <div class="col-lg-4 col-md-4 col-sm-12">
-                  <div class="blog_box">
-                    <div class="blog_img">
-                      <img src="<%= bedroomFurnitures[i].image %>" />
-                    </div>
-                    <p class="chair_text"><%= bedroomFurnitures[i].name %></p>
-                    <p class="chair_text">
-                      <%= bedroomFurnitures[i].category %>
-                    </p>
+      <div class="col-lg-9 blog-post-single">
+        <div class="row">
+          <div class="blog_section_2 layout_padding">
+            <div class="row">
+              <% if(furnitures) { %> <% for(let i=0; i< furnitures.length; i++)
+              { %>
+              <div class="col-lg-4 col-md-4 col-sm-12">
+                <div class="blog_box">
+                  <div class="blog_img">
+                    <img src="<%= furnitures[i].image %>" />
                   </div>
+                  <p class="chair_text"><%= furnitures[i].name %></p>
+                  <p class="chair_text"><%= furnitures[i].category %></p>
                 </div>
-                <% } %>
               </div>
+              <% } %> <% } %>
             </div>
           </div>
         </div>
+        <!-- end row -->
       </div>
-      <!-- Office Section -->
-      <div id="officeFurnitures" style="display: none">
-        <div class="blog_section layout_padding">
-          <div class="container">
-            <div class="blog_section_2 layout_padding">
-              <div class="row">
-                <% for(let i=0; i< officeFurnitures.length; i++) { %>
-                <div class="col-lg-4 col-md-4 col-sm-12">
-                  <div class="blog_box">
-                    <div class="blog_img">
-                      <img src="<%= officeFurnitures[i].image %>" />
-                    </div>
-                    <p class="chair_text"><%= officeFurnitures[i].name %></p>
-                    <p class="chair_text">
-                      <%= officeFurnitures[i].category %>
-                    </p>
-                  </div>
-                </div>
-                <% } %>
+      <!-- end col -->
+      <div class="col-lg-3 col-12 right-single">
+        <div class="widget-search">
+          <div class="site-search-area">
+            <form method="GET" id="site-searchform" action="/furnitures">
+              <div>
+                <input
+                  class="input-text form-control"
+                  name="search"
+                  id="search-k"
+                  placeholder="Search..."
+                  type="text"
+                />
+                <button id="searchsubmit" value="Search" type="submit"></button>
               </div>
-            </div>
+            </form>
           </div>
         </div>
-      </div>
-      <!-- Bathroom Section -->
-      <div id="bathroomFurnitures" style="display: none">
-        <div class="blog_section layout_padding">
-          <div class="container">
-            <div class="blog_section_2 layout_padding">
-              <div class="row">
-                <% for(let i=0; i< bathroomFurnitures.length; i++) { %>
-                <div class="col-lg-4 col-md-4 col-sm-12">
-                  <div class="blog_box">
-                    <div class="blog_img">
-                      <img src="<%= bathroomFurnitures[i].image %>" />
-                    </div>
-                    <p class="chair_text"><%= bathroomFurnitures[i].name %></p>
-                    <p class="chair_text">
-                      <%= bathroomFurnitures[i].category %>
-                    </p>
-                  </div>
-                </div>
-                <% } %>
-              </div>
-            </div>
-          </div>
+        <div class="widget-categories">
+          <h3 class="widget-title">Categories</h3>
+          <ul>
+            <li><a href="/furnitures?category=bedroom">Bedroom</a></li>
+            <li><a href="/furnitures?category=office">Office</a></li>
+            <li><a href="/furnitures?category=bathroom">Bathroom</a></li>
+          </ul>
         </div>
       </div>
     </div>
+    <!-- end row -->
   </div>
-
-  <!-- Furnitures section end -->
-  <%- include('partials/_footer') %>
+  <!-- end container -->
 </div>
+<!-- end section -->
+<!-- end section -->
+<!-- furnitures section end -->
+<%- include('partials/_footer') %>

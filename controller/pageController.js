@@ -1,34 +1,12 @@
-const { Furniture } = require('../models');
-
 exports.getHomePage = async (req, res) => {
-  const furnitures = await Furniture.findAll();
   res.render('index', {
     page_name: 'home',
-    furnitures,
   });
 };
 
 exports.getAboutPage = (req, res) => {
   res.render('about', {
     page_name: 'about',
-  });
-};
-
-exports.getFurnituresPage = async (req, res) => {
-  const bedroomFurnitures = await Furniture.findAll({
-    where: { category: 'bedroom' },
-  });
-  const officeFurnitures = await Furniture.findAll({
-    where: { category: 'office' },
-  });
-  const bathroomFurnitures = await Furniture.findAll({
-    where: { category: 'bathroom' },
-  });
-  res.render('furnitures', {
-    page_name: 'furnitures',
-    bedroomFurnitures,
-    officeFurnitures,
-    bathroomFurnitures,
   });
 };
 
