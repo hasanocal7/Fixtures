@@ -1,0 +1,33 @@
+version: '3.4'
+services:
+  fixtures-app:
+    container_name: Fixtures
+    build: .
+    ports:
+      - 3000:3000
+    depends_on:
+      - mysqlserver
+    volumes:
+      - fixtures-uploads:/public/uploads
+
+  mysqlserver:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: fixtures_dev
+    ports:
+      - 3306:3306
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    depends_on:
+      - mysqlserver
+
+volumes:
+  mysql_data:
+  fixtures-uploads:
