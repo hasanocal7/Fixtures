@@ -19,6 +19,29 @@
                   </div>
                   <p class="chair_text"><%= furnitures[i].name %></p>
                   <p class="chair_text"><%= furnitures[i].category %></p>
+                  <% if(user.role === 'member' && furnitures[i].isReserved ===
+                  false && reserve) { %>
+                  <form action="/furnitures/reserve" method="POST">
+                    <input
+                      type="hidden"
+                      name="FurnitureId"
+                      value="<%= furnitures[i].id %>"
+                    />
+                    <input
+                      type="hidden"
+                      name="name"
+                      value="<%= furnitures[i].name %>"
+                    />
+                    <input
+                      type="hidden"
+                      name="category"
+                      value="<%= furnitures[i].category %>"
+                    />
+                    <button class="btn btn-secondary" type="submit">
+                      Reserve
+                    </button>
+                  </form>
+                  <% } %>
                 </div>
               </div>
               <% } %> <% } %>

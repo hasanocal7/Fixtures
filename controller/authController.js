@@ -1,4 +1,4 @@
-const { User, Token, Furniture } = require('../models');
+const { User, Token, Furniture, Reserve } = require('../models');
 const { hashPassword } = require('../utils/hashPassword');
 const { sendingMail } = require('../utils/mailings');
 const crypto = require('crypto');
@@ -55,7 +55,6 @@ exports.verifyEmail = async (req, res) => {
         userId: req.params.id,
       },
     });
-    console.log(userToken);
 
     //if token doesn't exist, send status of 400
     if (!userToken) {
@@ -65,11 +64,8 @@ exports.verifyEmail = async (req, res) => {
 
       //if token exist, find the user with that token
     } else {
-      console.log(req.params.id);
       const user = await User.findOne({ where: { id: req.params.id } });
       if (!user) {
-        console.log(user);
-
         return res.status(401).send({
           msg: 'We were unable to find a user for this verification. Please SignUp!',
         });
@@ -90,7 +86,6 @@ exports.verifyEmail = async (req, res) => {
             },
           }
         );
-        console.log(updated);
 
         //if not updated send error message
         if (!updated) {
@@ -104,11 +99,11 @@ exports.verifyEmail = async (req, res) => {
       }
     }
   } catch (error) {
-    console.log(error);
+    next(error);
   }
 };
 
-exports.loginUser = async (req, res) => {
+exports.loginUser = async (req, res, next) => {
   try {
     const { email } = req.body;
     const user = await User.findOne({ where: { email: email } });
@@ -125,15 +120,19 @@ exports.loginUser = async (req, res) => {
     });
     res.status(200).redirect('/users/dashboard');
   } catch (error) {
-    res.status(400).send(error);
+    next(error);
   }
 };
 
 exports.getDashboardPage = async (req, res) => {
   const user = await User.findOne({ where: { id: res.locals.user.id } });
   const furnitures = await Furniture.findAll();
+  const reserves = await Reserve.findAll({
+    where: { UserId: res.locals.user.id },
+  });
   res.status(200).render('dashboard', {
     user,
     furnitures,
+    reserves,
   });
 };

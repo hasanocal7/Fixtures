@@ -1,5 +1,5 @@
 const { fileLoader } = require('ejs');
-const { Furniture } = require('../models');
+const { Furniture, User, Reserve } = require('../models');
 const multer = require('multer');
 
 exports.createFurniture = async (req, res) => {
@@ -26,6 +26,10 @@ exports.createFurniture = async (req, res) => {
 
 exports.getAllFurnitures = async (req, res, next) => {
   try {
+    const user = await User.findOne({ where: { id: res.locals.user.id } });
+    const reserve = await Reserve.findAll({
+      where: { UserId: res.locals.user.id },
+    });
     const category = req.query.category;
     let filter = {};
     if (category) {
@@ -35,6 +39,8 @@ exports.getAllFurnitures = async (req, res, next) => {
     res.status(200).render('furnitures', {
       page_name: 'furnitures',
       furnitures,
+      user,
+      reserve,
     });
   } catch (error) {
     next(error);
@@ -71,6 +77,30 @@ exports.deleteFurniture = (req, res, next) => {
   try {
     Furniture.destroy({ where: { id: req.params.id } });
     res.status(200).redirect('/users/dashboard');
+  } catch (error) {
+    next(error);
+  }
+};
+
+exports.reserveFurnitures = async (req, res, next) => {
+  try {
+    const { FurnitureId, name, category } = req.body;
+    const user = await User.findOne({ where: { id: res.locals.user.id } });
+    const newReserve = await Reserve.create({
+      name: name,
+      category: category,
+      UserId: user.id,
+      FurnitureId: FurnitureId,
+    });
+    if (newReserve) {
+      await Furniture.update(
+        {
+          isReserved: true,
+        },
+        { where: { id: FurnitureId } }
+      );
+    }
+    res.status(201).redirect('/users/dashboard');
   } catch (error) {
     next(error);
   }

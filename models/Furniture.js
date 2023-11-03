@@ -12,7 +12,17 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: true,
     },
+    isReserved: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+    },
   });
+
+  Furniture.associate = (models) => {
+    Furniture.hasMany(models.Reserve, {
+      onDelete: 'cascade',
+    });
+  };
 
   return Furniture;
 };

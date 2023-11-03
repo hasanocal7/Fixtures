@@ -15,6 +15,8 @@ router
 
 router.route('/:id').delete(furnitureController.deleteFurniture);
 
+router.route('/reserve').post(furnitureController.reserveFurnitures);
+
 router.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500);
